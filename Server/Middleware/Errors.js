@@ -2,7 +2,7 @@ import { response } from "express";
 
 const notFound = (req,res,next)=>{
     const error = new Error(`Not found - ${res.originalUrl}`);
-    response.status(404).send(error);
+    res.status(404).send(error);
 }
 const errorHandler = (err,req,res,next)=>{
     const statusCode = res.statusCode === 200 ? 500 : res.statusCode;

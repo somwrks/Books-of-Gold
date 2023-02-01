@@ -22,7 +22,7 @@ const products = [
     numReviews: 4,
   },
   {
-    name: "How to Win Friends and Influence People",
+    name: "How to Win Friends & Influence People",
     author: "Dale Carnegie",
     image: "https://images-na.ssl-images-amazon.com/images/I/611OWa8x+WL.jpg",
     price: 10.45,
