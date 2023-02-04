@@ -3,7 +3,7 @@ Advanced and Updated Version of my old **E-Commerce Website**. It has both Admin
 
 ![image](https://user-images.githubusercontent.com/85481905/212071161-83005597-f209-4575-9355-df98f38f8655.png)
 
-**Features**
+# Features
 
 - Large Scale Capability and Flexibility
 - Login Authentication
