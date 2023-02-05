@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Rating from "./Rating";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import URL from "../../Redux/Url"
+
 
 const Featured = () => {
   window.scrollTo(0, 0);
@@ -11,7 +13,7 @@ const Featured = () => {
 
   useEffect(() => {
     const fetchproducts = async () => {
-      const { data } = await axios.get(`/api/products`);
+      const { data } = await axios.get(`${URL}/api/products`);
       setProducts(data);
     };
     fetchproducts();

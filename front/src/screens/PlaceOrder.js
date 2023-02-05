@@ -5,6 +5,8 @@ import EmptyCart from "../components/Main/EmptyCart";
 import { createOrder } from "../Redux/Actions/OrderActions";
 import Message from "../components/LoadingError/Error";
 import { ORDER_CREATE_RESET } from "../Redux/Constants/orderConstants";
+import URL from "../Redux/Url"
+
 const PlaceOrder = ({ history }) => {
   const dispatch = useDispatch();
   window.scrollTo(0, 0);
@@ -35,7 +37,7 @@ const PlaceOrder = ({ history }) => {
 
   useEffect(() => {
     if (success) {
-      history.push(`/order/${order._id}`);
+      history.push(`${URL}/order/${order._id}`);
       dispatch({ type: ORDER_CREATE_RESET });
     }
   }, [history, dispatch, success, order]);

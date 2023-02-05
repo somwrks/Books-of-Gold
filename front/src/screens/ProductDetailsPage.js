@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Rating from "../components/Main/Rating";
 import { useDispatch, useSelector } from "react-redux";
-import { createProductReview, listProductDetails } from "../Redux/Actions/ProductActions";
+import { createProductReview, listProductDetails,editReview } from "../Redux/Actions/ProductActions";
 import Loader from "../components/LoadingError/Loader";
+import moment from "moment";
 import LoggedOut from "../components/Main/LoggedOut";
 import Error from "../components/LoadingError/Error";
 import StockErrored from "../components/Main/StockError";
@@ -11,8 +12,11 @@ import Message from "../components/LoadingError/Error";
 
 const ProductDetailsPage = ({ history, match }) => {
   const [qty, setQty] = useState(1);
+  const [edit, setedit] = useState(false)
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
+  const [editrating, setEditrating] = useState(0);
+  const [editcomment, setEditcomment] = useState("");
   const productId = match.params.id;
 
   const dispatch = useDispatch();
@@ -26,7 +30,7 @@ const ProductDetailsPage = ({ history, match }) => {
     loading: loadingCreateReview,
     error: errorCreateReview,
     success: successCreateReview,
-  } = productReview;
+  } = productReview; 
 
   useEffect(() => {
     if (successCreateReview) {
@@ -46,8 +50,18 @@ const ProductDetailsPage = ({ history, match }) => {
   const handleSubmit =(e) =>{
     e.preventDefault();
     dispatch(createProductReview(productId, {rating, comment}))
-
-
+  }
+  const SubmitEdit =(e) =>{
+    e.preventDefault();
+    window.location.href="/"
+    // dispatch(editReview(productId,{  id: userLogin._id, editrating, editcomment, }))
+  }
+  
+  const handledit =()=>{
+    setedit(true)
+  }
+  const cancledit=() =>{
+    setedit(false)
   }
   return (
     <>
@@ -151,14 +165,20 @@ const ProductDetailsPage = ({ history, match }) => {
         </div>
       )}
       {product.reviews.map(review => (
-        <div key={review.id} className="bg-wheat p-5 mb-5 rounded-lg">
+        <div key={review.id} className="bg-wheat min-h[50vh] p-8 mb-5 rounded-lg">
+        <div className="flex  justify-between">
           <div className="flex items-center mb-3">
               <h1 className="text-2xl font-bold">{review.name}</h1>
-              <Rating value={review.rating}/>
-              <p className="text-xl text-gray-600">{review.moment(review.createdAt).calender()}</p>
+              <Rating value={review.rating} text={review.rating}/>
+              <p className="text-xl text-gray-600">{moment(review.createdAt).format("LL")}</p>
             </div>
-            <div>
+            {review.name === userInfo.name?
+            <div className="edit" >
+            <i class={ edit===false ?"text-3xl fa-solid fa-pen-to-square": "text-3xl fa-sharp fa-solid fa-xmark"} id="pencil" onClick={ edit===false? handledit:cancledit}></i>
           </div>
+            :""
+            }
+        </div>
           <p className="text-md">{review.comment}</p>
         </div>
       ))}
@@ -172,6 +192,7 @@ const ProductDetailsPage = ({ history, match }) => {
         {errorCreateReview && <Message variant={"alert-danger"}>{error}</Message>}
       </div>
       {userInfo?
+      edit ===false? 
       <form onSubmit={handleSubmit}>
         
         <div className="mb-4">
@@ -216,7 +237,53 @@ const ProductDetailsPage = ({ history, match }) => {
         >
           Submit Review
         </button>
-      </form> : <LoggedOut/>
+      </form> : 
+      <form onSubmit={SubmitEdit}>
+        
+        <div className="mb-4">
+          <label
+            className="block text-xl text-gray-700 font-medium mb-2"
+            htmlFor="review"
+          >
+            Edit Your Review:
+          </label>
+          <textarea
+            className="w-full border border-gray-400 p-2"
+            id="review"
+            rows="4"
+            value={editcomment}
+            onChange={(e) => setEditcomment(e.target.value)}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 font-medium mb-2"
+            htmlFor="rating"
+          >
+            Edit Rating:
+          </label>
+          <select
+            className="w-full border border-gray-400 p-2"
+            id="rating"
+            value={editrating}
+            onChange={(e) => setEditrating(e.target.value)}
+          >
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+        <button
+          className="btn"
+          type="submit"
+        >
+          Update Review
+        </button>
+      </form>
+       : <LoggedOut/>
       }
     </div>
     </>

@@ -20,6 +20,7 @@ const ProfileScreen = () => {
   const {orders } = orderListMy;
   const userDetails = useSelector((state) => state.userDetails);
   const { user } = userDetails;
+  
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { loading: updateLoading } = userUpdateProfile;
 
@@ -50,7 +51,7 @@ const ProfileScreen = () => {
       setEmail(user.email);
     }
   }, [dispatch, user]);
-
+ 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (password !== confirm) {

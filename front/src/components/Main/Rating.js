@@ -2,7 +2,7 @@ import React from "react";
 
 const Rating = ({ value, text }) => {
   return (
-    <div className="pt-1">
+    <div className="px-3 pt-1">
       <i
         className={
           value >= 1

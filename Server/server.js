@@ -13,6 +13,7 @@ connectDatabase();
 const app = express();
 app.use(express.json())
 const port = process.env.PORT;
+app.use(cors())
 // API
 app.use(cors());
 app.use( "/api/import", ImportData);

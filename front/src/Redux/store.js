@@ -5,6 +5,7 @@ import {
   productCreateReviewReducer,
   productDetailsReducer,
   productListReducer,
+  editReviewReducer,
 } from "./Reducers/ProductReducers";
 import { cartReducer } from "./Reducers/CartReducers";
 import {
@@ -28,6 +29,7 @@ const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
+  // editReview: editReviewReducer,
   userUpdateProfile: userUpdateProfilereducer,
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
@@ -50,7 +52,7 @@ const initialState = {
   },
   userLogin: {
     userInfo: userInfoFromLocalStorage,
-  },
+  },  
 };
 
 const middleware = [thunk];

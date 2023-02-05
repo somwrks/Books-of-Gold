@@ -5,7 +5,6 @@ import ShopHeader from "./ShopHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { listProduct } from "../../Redux/Actions/ProductActions";
 import Loader from "../LoadingError/Loader.js";
-import axios from "axios";
 import Message from "../LoadingError/Error.js";
 
 const Shop = ({match}) => {
@@ -21,7 +20,6 @@ const Shop = ({match}) => {
     dispatch(listProduct(keyword));
   }, [dispatch,keyword]);
 
-  axios.defaults.baseURL = "http://localhost:5000";
   return (
     <>
       {loading ? (

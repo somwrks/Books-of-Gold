@@ -15,6 +15,7 @@ import {
   ORDER_PAY_SUCCESS,
 } from "../Constants/orderConstants";
 import { logout } from "./userActions";
+import URL  from "../Url";
 
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
@@ -30,7 +31,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(`/api/orders`, order, config);
+    const { data } = await axios.post(`${URL}/api/orders`, order, config);
     dispatch({ type: ORDER_CREATE_SUCCESS, payload: data });
     dispatch({ type: CART_CLEAR_ITEMS, payload: data });
 
@@ -63,7 +64,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/orders/${id}`, config);
+    const { data } = await axios.get(`${URL}/api/orders/${id}`, config);
     dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
     dispatch({ type: CART_CLEAR_ITEMS, payload: data });
   } catch (error) {
@@ -97,7 +98,7 @@ export const payOrder =
       };
 
       const { data } = await axios.put(
-        `/api/orders/${orderId}/pay`,
+        `${URL}/api/orders/${orderId}/pay`,
         paymentResult,
         config
       );

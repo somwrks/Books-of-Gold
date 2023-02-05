@@ -10,10 +10,9 @@ import GooglePayButton from "@google-pay/button-react";
 import { ORDER_PAY_RESET } from "../Redux/Constants/orderConstants";
 
 const OrderScreen = ({ match }) => {
-  
   const orderId = match.params.id;
   window.scrollTo(0, 0);
-  
+
   const dispatch = useDispatch();
 
   const orderDetails = useSelector((state) => state.orderDetails);
@@ -37,7 +36,7 @@ const OrderScreen = ({ match }) => {
       dispatch(getOrderDetails(orderId));
     } else if (!order.isPaid) {
       GooglePayScript();
-    } 
+    }
   }, [dispatch, orderId, successPay, order]);
 
   const successPaymentHandler = (paymentResult) => {
@@ -147,7 +146,7 @@ const OrderScreen = ({ match }) => {
                   transactionInfo: {
                     totalPriceStatus: "FINAL",
                     totalPriceLabel: "Total",
-                    totalPrice: (order.totalPrice).toString(),
+                    totalPrice: order.totalPrice.toString(),
                     currencyCode: "USD",
                     countryCode: "US",
                   },
