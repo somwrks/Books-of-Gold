@@ -8,7 +8,6 @@ Advanced and Updated Version of my old **E-Commerce Website**. It has both Admin
 - Large Scale Capability and Flexibility
 - Login Authentication
 - Payment Authentication
-- Libraries - **Flowbite** , **Redux**, **npm overlay navbar** and **Sass**
 
 **Frontend** - ReactJS, and Tailwind
 **Backend** - NodeJs, ExpressJs
